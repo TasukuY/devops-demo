@@ -18,6 +18,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
     <script>
+        const baseURL = "https://f19-rollbar-demo-ty.herokuapp.com/" || "http://localhost:5050";
         const addForm = document.querySelector('form');
         const nameInput = document.querySelector('input');
         const container = document.querySelector('section');
@@ -35,7 +36,7 @@
 
                 element.addEventListener('click', () => {
                     axios
-                        .delete(`/api/students/${theIndexValue}`)
+                        .delete(`${baseURL}/api/students/${theIndexValue}`)
                         .then(res => {
                             putTheThingInTheView(res)
                         })
@@ -47,7 +48,7 @@
             evt.preventDefault();
 
             axios
-                .post('/api/students', { name: nameInput.value })
+                .post(`${baseURL}/api/students`, { name: nameInput.value })
                 .then(res => {
                     putTheThingInTheView(res)
                 })
@@ -69,7 +70,7 @@
 
         // get student list on initial load
         axios
-            .get('/api/students')
+            .get(`${baseURL}/api/students`)
             .then(res => {
                 putTheThingInTheView(res)
             })
